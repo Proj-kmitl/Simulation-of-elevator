@@ -30,7 +30,7 @@ void loop() {
       Serial.println(rfid.PICC_GetTypeName(piccType));
 
       // print UID in Serial Monitor in the hex format
-      Serial.print("UID:");
+      Serial.print("UID is :");
       for (int i = 0; i < rfid.uid.size; i++) {
         Serial.print(rfid.uid.uidByte[i] < 0x10 ? " 0" : " ");
         Serial.print(rfid.uid.uidByte[i], HEX);
