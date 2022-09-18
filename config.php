@@ -4,10 +4,10 @@ $username = "root";
 $password = "";
 $db = "pj65";
 
-$conn = new mysqli($servername, $username, $password,$db);
+$connect = new mysqli($servername, $username, $password,$db);
 
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+if ($connect->connect_error) {
+  die("Connection failed: " . $connect->connect_error);
 }
 echo "Connected successfully";
 ?>
