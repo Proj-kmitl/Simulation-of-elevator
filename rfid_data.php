@@ -10,6 +10,8 @@ if(!$connect){
 }
 
 echo "Connection Success!<br><br>";
+$delete = "DELETE FROM rfiddata";
+$delresult = mysqli_query($connect,$delete);
 
 $rfid_id = $_GET["rfid_id"];
 
