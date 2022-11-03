@@ -4,6 +4,49 @@
     include 'sidebar.php';
 ?>
 
+<?php
+    include_once('esp-database.php');
+
+    $esp_result = getAllOutputs();
+    $html_buttons = null;
+    $html_buttons_all = null;
+    if ($esp_result) {
+        while ($row = $esp_result->fetch_assoc()) {
+            if ($row["state"] == "1"){
+                $button_checked = "checked";
+            }
+            else {
+                $button_checked = "";
+            }
+            $html_buttons .= '
+            <label class="switch"><input type="checkbox" class="e1_checkbox" onchange="updateOutput(this)" id="' . $row["id"] . '" ' . $button_checked . '>
+            <span class="slider round"></span></label>';
+            $html_buttons_all .= '
+            <label class="switch"><input type="checkbox" id="e1_select-all" onchange="updateOutput(this)" id="' . $row["id"] . '" ' . $button_checked . '>
+            <span class="slider round"></span></label>';
+
+
+        }
+    }
+
+
+    $result2 = getAllBoards();
+    $html_boards = null;
+    if ($result2) {
+        $html_boards .= '<h3>Boards</h3>';
+        while ($row = $result2->fetch_assoc()) {
+            $row_reading_time = $row["last_request"];
+            // Uncomment to set timezone to - 1 hour (you can change 1 to any number)
+            //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time - 1 hours"));
+
+            // Uncomment to set timezone to + 4 hours (you can change 4 to any number)
+            //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time + 7 hours"));
+            $html_boards .= '<p><strong>Board ' . $row["board"] . '</strong> - Last Request Time: '. $row_reading_time . '</p>';
+        }
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +56,6 @@
     <link href='https://css.gg/css' rel='stylesheet'>
     <link href='https://unpkg.com/css.gg/icons/all.css' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/css.gg/icons/all.css' rel='stylesheet'>
-    
     <style>
         
 
@@ -174,7 +216,7 @@
                     </ol>
                 </nav>
                 <h1 class="h2">Dashboard</h1>
-                <!-- <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p> -->
+
                 <div class="row my-4" style="border: solid none;">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0" >
                         <div class="card" >
@@ -182,34 +224,24 @@
                             <div class="card-body">
                               <h5 class="card-title"></h5>
                               <p class="card-text">Floor 1
-                                <label class="switch">
-                                <input type="checkbox" class="e1_checkbox" checked>
-                                <span class="slider round"></span>
-                                </label>
+                              <label class="switch"><input type="checkbox" class="e1_checkbox" onchange="updateOutput(this)" id="1">
+                              <span class="slider round"></span></label>
                               </p>
                               <p class="card-text">Floor 2
-                                <label class="switch">
-                                <input type="checkbox" class="e1_checkbox" checked>
-                                <span class="slider round"></span>
-                                </label>
+                              <label class="switch"><input type="checkbox" class="e1_checkbox" onchange="updateOutput(this)" id="2">
+                              <span class="slider round"></span></label>
                               </p>
                               <p class="card-text">Floor 3
-                                <label class="switch">
-                                <input type="checkbox" class="e1_checkbox" checked>
-                                <span class="slider round"></span>
-                                </label>
+                              <label class="switch"><input type="checkbox" class="e1_checkbox" onchange="updateOutput(this)" id="3">
+                              <span class="slider round"></span></label>
                               </p>
                               <p class="card-text">Floor 4
-                                <label class="switch">
-                                <input type="checkbox" class="e1_checkbox" checked>
-                                <span class="slider round"></span>
-                                </label>
+                              <label class="switch"><input type="checkbox" class="e1_checkbox" onchange="updateOutput(this)" id="4">
+                              <span class="slider round"></span></label>
                               </p>
                               <p class="card-text">Close All
-                              <label class="switch" style="margin-left: 50px;">
-                                <input type="checkbox" id="e1_select-all" checked>
-                                <span class="slider round"></span>
-                                </label>
+                              <label class="switch" style="margin-left: 50px;"><input type="checkbox" class="e1_checkbox"  onchange="closed(this)" id="e1_select-all">
+                              <span class="slider round"></span></label>
                               </p>
                             </div>
                         </div>
@@ -1063,51 +1095,100 @@
             </main>
         </div>
     </div>
+
+    
     <script>
         $('#e1_select-all').click(function(event) {   
     if(this.checked) {
         // Iterate each checkbox
+        
         $('.e1_checkbox').each(function() {
-            this.checked = true;                        
+            this.checked = true;               
         });
     } else {
+        
         $('.e1_checkbox').each(function() {
-            this.checked = false;                       
+            this.checked = false;                    
         });
     }
 });
     </script>
 
      <script>
+        var xhr = new XMLHttpRequest();
         $('#e2_select-all').click(function(event) {   
     if(this.checked) {
         // Iterate each checkbox
         $('.e2_checkbox').each(function() {
-            this.checked = true;                        
+            this.checked = true;              
         });
     } else {
         $('.e2_checkbox').each(function() {
-            this.checked = false;                       
+            this.checked = false;                 
         });
     }
 });
+
     </script>
     
-    <script>
-        new Chartist.Line('#traffic-chart', {
-            labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-            series: [
-                [23000, 25000, 19000, 34000, 56000, 64000]
-            ]
-            }, {
-            low: 0,
-            showArea: true
-        });
-    </script>
 
 <script>
 feather.replace()
 </script>
+
+<script>
+        function updateOutput(element) {
+            var xhr = new XMLHttpRequest();
+            if(element.checked){
+                xhr.open("GET", "esp-outputs-action.php?action=output_update&id="+element.id+"&state=1", true);
+            }
+            else {
+                xhr.open("GET", "esp-outputs-action.php?action=output_update&id="+element.id+"&state=0", true);
+            }
+            xhr.send();
+        }
+        function closed(element) {
+            var xhr = new XMLHttpRequest();
+            if(element.checked){
+                xhr.open("GET", "esp-outputs-action.php?action=closed_update&cstate=1&board=1", true);
+            }
+            else {
+                xhr.open("GET", "esp-outputs-action.php?action=closed_update&cstate=0&board=1", true);
+            }
+            xhr.send();
+        }
+
+        function deleteOutput(element) {
+            var result = confirm("Want to delete this output?");
+            if (result) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "esp-outputs-action.php?action=output_delete&id="+element.id, true);
+                xhr.send();
+                alert("Output deleted");
+                setTimeout(function(){ window.location.reload(); });
+            }
+        }
+
+        function createOutput(element) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "esp-outputs-action.php", true);
+
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    alert("Output created");
+                    setTimeout(function(){ window.location.reload(); });
+                }
+            }
+            var outputName = document.getElementById("outputName").value;
+            var outputBoard = document.getElementById("outputBoard").value;
+            var outputGpio = document.getElementById("outputGpio").value;
+            var outputState = document.getElementById("outputState").value;
+            var httpRequestData = "action=output_create&name="+outputName+"&board="+outputBoard+"&gpio="+outputGpio+"&state="+outputState;
+            xhr.send(httpRequestData);
+        }
+    </script>
 </body>
 </html>
 
