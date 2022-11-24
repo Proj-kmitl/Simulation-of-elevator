@@ -1,5 +1,6 @@
 <?php	
     require_once 'config.php';
+	include 'sidebar.php';
 	//include "nav.php";
 	date_default_timezone_set('Asia/Bangkok');
 	ini_set('mysql.connect_timeout', 300);
@@ -11,18 +12,22 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Add Users</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<title>Register</title>
 	<style>	
 		.card-body-server {
 			height: 580px;
 			overflow-y: scroll;
 			
+		}
+		input, select {
+			margin-bottom: 10px;
+		}
+		button {
+			margin-top: 10px;
+		}
+
+		#productDisplay {
+			border-radius: 100%;
 		}
 	</style>
 
@@ -49,9 +54,9 @@
                             });*/
                             $("#myBody").empty();
                             $.each(obj, function(key, val) {
-                                      var tr = "<input type='text' name='amout' class='form-control' value='"+val["RFID_ID"]+" ' readonly>";
+                                      var tr = "<input type='text' name='rfid_text' id='rfid_text' class='form-control' value='"+val["RFID_ID"]+" '>";
                                       
-                                      $('#myRFID > tbody').append(tr);
+                                      $('#myRFID > span').append(tr);
                             });
                            
                       }
@@ -64,28 +69,34 @@
 </script>
 </head>
 <body class="font-mali">
-	<div class="container mb-2" style="width:60%;">
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Register</li>
+                    </ol>
+                </nav>
+                
+
+
+				<div class="container mb-2" style="width:60%;">
 		<div class="row mt-2 ">
 			<div class="col" >
 				<div class="card">
 					<center><h4 class="card-header bg-danger text-white">Add Users</h4></center>
 					<div class="card-body">
-						<form action="add_stock.php" method="POST" enctype="multipart/form-data">
-							<div class="form-group">
+						<form action="register.php" method="POST" enctype="multipart/form-data">
+							<div class="form-group mb-5">
 								<center><img src="image/placeholder.png" width = "200" hieght="200" onclick="triggerClick()" id="productDisplay"><br></center>
-							<label for="productImage">รูปภาพ</label>
-								<input type="file" name="image" class="form-control" id="image" accept = "image/*" onchange="displayImage(this) ">
+							<label for="productImage" hidden>รูปภาพ</label>
+								<input type="file" name="image" class="form-control" id="image" accept = "image/*" onchange="displayImage(this) " hidden>
 							</div>	
-                            <div class="form-group" >
+                            <div class="form-group" id="myRFID" >
                                 <label for="">รหัส RFID</label>
-                                    <table id="myRFID" class="form-group" width="100%">
+                                
 
-                                       <tbody id="myBody"></tbody> 
-</table>
-                                    
-                                    <!-- body dynamic rows -->
-                                    
-                        
+                                    <span id="myBody"></span> 
+									<!-- <button onclick="myFunction()">Copy text</button> -->
                             </div>
                             <?php
                             /*    $sql = "SELECT RFID_ID FROM rfiddata";
@@ -105,7 +116,7 @@
 							</div>
 							<div class="form-group">
 								<label for="">ตำแหน่ง</label><br>
-								<select name="type" id="" class="form-select" aria-label="Default select example" >
+								<select name="position" id="" class="form-select" aria-label="Default select example" >
 									<option value="">---เลือก---</option>
 									<option value="พนักงานประจำ">พนักงานประจำ</option>
 									<option value="พนักงานชั่วคราว">พนักงานชั่วคราว</option>
@@ -116,29 +127,46 @@
 							</div>
                             <div class="form-group">
 								<label for="">ชั้นที่มีสิทธิ์</label>
-								<input type="number" name="name" class="form-control" value=" " min="2" required>
+								<input type="number" name="floor" class="form-control" value=" " min="2" >
 							</div>
 							<div class="form-group">
 								<label for="">วันบัตรหมดอายุ</label>
-								<input type="date" name="amout" class="form-control" value=" " >
+								<input type="date" name="exp_date" class="form-control" value=" " >
 								<br>
 							</div>
 							<div class="form-group">
 								<fieldset>
 									<legend>รายละเอียดที่อยู่</legend>
-									<textarea name="detail" id="" cols="70" rows="5" class="form-control mb-2"></textarea>
+									<textarea name="address" id="" cols="70" rows="5" class="form-control mb-2"></textarea>
 								</fieldset>
 							</div>							
 							<button class="btn btn-success" type="submit" name="submit" id="submit" >บันทึก</button>
-							<button class="btn btn-warning" type="reset" name="reset" id="reset" >รีเซ็ต</button>
+							<button class="btn btn-warning" type="submit" name="reset" id="reset"  >รีเซ็ต</button>
 							<button class="btn btn-primary" type="submit" name="showstock" formaction="show_stock.php" >ดูบัญชีผู้ใช้งาน</button>
 						</form>
 					</div>
 				</div>
 			</div>
 
+</main>
+	
 
-			
+	<script>
+		function myFunction() {
+  // Get the text field
+		var copyText = document.getElementById("rfid_text");
+
+		// Select the text field
+		copyText.select();
+		copyText.setSelectionRange(0, 99999); // For mobile devices
+
+		// Copy the text inside the text field
+		navigator.clipboard.writeText(copyText.value);
+
+		// Alert the copied text
+		//alert("Copied the text: " + copyText.value);
+		}
+	</script>		
 	<script src="imageDisplay.js"></script>
 	<?php
 	?>
