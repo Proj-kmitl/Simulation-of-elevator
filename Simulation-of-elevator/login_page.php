@@ -17,13 +17,13 @@ ini_set('default_socket_timeout', 300);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
     <style>
     body{
-        background-color: #FF6600;
+        background-color: rgba(0,41,107,1);
     }
     .container{
             display: border solid black;
             width: 50%;
         }
-        .text {
+    .text {
     position: absolute;
     top: 10%; 
     right: 50%;
@@ -47,13 +47,45 @@ ini_set('default_socket_timeout', 300);
     1px 22px 10px rgba(16,16,16,0.2),
     1px 25px 35px rgba(16,16,16,0.2),
     1px 30px 60px rgba(16,16,16,0.4);
-}
+    }
+   
+    .v102_142 {
+    width: 709px;
+    height: 510px;
+    background: rgba(251,80,18,0.8999999761581421);
+    opacity: 1;
+    position: absolute;
+    top: 281px;
+    left: 366px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+    }
+    .v102_379 {
+    width: 709px;
+    height: 448px;
+    background: rgba(225,221,221,1);
+    opacity: 1;
+    position: absolute;
+    top: 353px;
+    left: 366px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+    }
     </style>
 </head>
 <body>
-        <center><span class="text ">LIFT KUNG</span></center>
-    <div class="container bg-light"style="margin-top:150px;border-radius:20px;box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);">
-        <h3 class="mt-4 mb-2 card-header bg-light text-dark">เข้าสู่ระบบนะจ๊ะ</h3>
+    <center><span class="text ">ELEVATOR   Manage</span></center>
+    <div class="v102_142" color= rgba(255,251,251,0.8999999761581421) font-weight= Extra Bold>
+    <h3 class="mt-4 mb-2 text-light"> LOGIN</h3>
+    </div>
+    <div class="v102_379">
+    <br>
         <form action="login_db.php" method="post">
             <?php if(isset($_SESSION['error'])) { ?>
                 <div class="alert alert-danger" role="alert">
@@ -72,16 +104,19 @@ ini_set('default_socket_timeout', 300);
                 </div>
             <?php } ?>
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="form-label">  Username</label>
                 <input type="text" class="form-control" name="username">
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">  Password</label>
                 <input type="password" class="form-control" name="password">
             </div>
             <button type="submit" name="signin" class="btn btn-primary">Sign In</button>
-        </form>
-        <hr>
-    </div>   
+        </form>   
+        <br>
+        </div>
+        
 </body>
+
+
 </html>
