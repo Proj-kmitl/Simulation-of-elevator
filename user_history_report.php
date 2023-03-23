@@ -79,13 +79,15 @@
                 $arrCol = array();
                    while($row = $result->fetch_assoc())
                    {
+                       $rfid_id = $row['rfid_id'];
                        $id = $row['id'];
                        $name = $row['name'];
                        $from = $row['from'];
                        $to = $row['to'];
                        $date = $row['date'];
+                       $image = $row['image'];
                
-                       $resultArray[] = array("id" => $id, "name" => $name, "from" => $from, "to" => $to, "date" => $date); 
+                       $resultArray[] = array("rfid_id" => $rfid_id, "id" => $id, "name" => $name, "from" => $from, "to" => $to, "date" => $date, "image" => $image); 
 
                        
                
@@ -99,15 +101,16 @@
                         <div class="card">
                             <h5 class="card-header"><?php echo "<b>$user_id</b>"; ?> Usage History </h5>
                             <div class="card-body">
-                                <div class="table-responsive" style="height: 200px; overflow: auto;">
+                                <div class="table-responsive" style="height: 550px; overflow: auto;">
                                     <table class="table" id="myTable">
                                         <thead>
-                                          
+                                            <th scope="col" >RFID ID</th>
                                             <th scope="col" >ID</th>
                                             <th scope="col">Username</th>
                                             <th scope="col">From(Floor)</th>
                                             <th scope="col">To(Floor)</th>
                                             <th scope="col">Date</th>
+                                            <th scope="col" >Image</th>
                                         
                                             
                                           
@@ -127,21 +130,25 @@
                                             $arrCol = array();
                                                while($row = $result->fetch_assoc())
                                                {
+                                                   $rfid_id = $row['rfid_id'];
                                                    $id = $row['id'];
                                                    $name = $row['name'];
                                                    $from = $row['from'];
                                                    $to = $row['to'];
                                                    $date = $row['date'];
+                                                   $image = $row['image'];
                                            
-                                                   $resultArray[] = array("id" => $id, "name" => $name, "from" => $from, "to" => $to, "date" => $date); 
+                                                   $resultArray[] = array("rfid_id" => $rfid_id, "id" => $id, "name" => $name, "from" => $from, "to" => $to, "date" => $date, "image" => $image); 
 
                                                    echo "
                                                         <tr>
+                                                            <td>".$row['rfid_id']."</td>
                                                             <td>".$row['id']."</td>
                                                             <td>".$row['name']."</td>
                                                             <td>".$row['from']."</td>
                                                             <td>".$row['to']."</td>
                                                             <td>".$row['date']."</td>
+                                                            <td><img src=faces/".$row['image']." width=100 height=80></td>
                                                         </tr>
                                                         ";
                                            

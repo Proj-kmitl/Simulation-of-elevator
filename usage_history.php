@@ -30,7 +30,7 @@
                                     
                                     $("#myBody").empty();
                                     $.each(obj, function(key, val) {
-                                            var tr = "<tr><td scope='row'>"+val["id"]+"</td><td>"+val["name"]+"</td><td>"+val["from"]+"</td><td>"+val["to"]+"</td><td>"+val["date"]+"</td></tr>";
+                                            var tr = "<tr><td scope='row'>"+val["rfid_id"]+"</td><td>"+val["id"]+"</td><td>"+val["name"]+"</td><td>"+val["from"]+"</td><td>"+val["to"]+"</td><td>"+val["date"]+"</td><td>"+val["image"]+"</td></tr>";
 
                                             $('#myTable > tbody').append(tr);
                                     });
@@ -74,12 +74,13 @@
                                 <div class="table-responsive" style="height: 550px; overflow: auto;">
                                     <table class="table" id="myTable">
                                         <thead>
-                                          
+                                            <th scope="col" >RFID ID</th>
                                             <th scope="col" >ID</th>
                                             <th scope="col">Username</th>
                                             <th scope="col">From(Floor)</th>
                                             <th scope="col">To(Floor)</th>
                                             <th scope="col">Date</th>
+                                            <th scope="col">Image</th>
                                             
                                         
                                             
@@ -94,25 +95,30 @@
                                             //$intNumField = $result->num_fields();
                                             $resultArray = array();
                                             $historyArray = array();
-                                            $fieldinfo = $result -> fetch_fields();
+                                            //$fieldinfo = $result -> fetch_fields();
                                             $arrCol = array();
-                                               while($row = $result->fetch_assoc())
+                                            while($row = $result->fetch_assoc())
                                                {
+                                                   //$rfid = $row['rfid_id'];
+                                                   $rfid_id = $row['rfid_id'];
                                                    $id = $row['id'];
                                                    $name = $row['name'];
                                                    $from = $row['from'];
                                                    $to = $row['to'];
                                                    $date = $row['date'];
+                                                   $image = $row['image'];
                                            
-                                                   $resultArray[] = array("id" => $id, "name" => $name, "from" => $from, "to" => $to, "date" => $date); 
+                                                   $resultArray[] = array("rfid_id" => $rfid_id, "id" => $id, "name" => $name, "from" => $from, "to" => $to, "date" => $date, "image" => $image); 
 
                                                    echo "
                                                         <tr>
+                                                            <td>".$row['rfid_id']."</td>
                                                             <td>".$row['id']."</td>
                                                             <td>".$row['name']."</td>
                                                             <td>".$row['from']."</td>
                                                             <td>".$row['to']."</td>
                                                             <td>".$row['date']."</td>
+                                                            <td><img src=faces/".$row['image']." width=100 height=80></td>
                                                         </tr>
                                                         ";
                                            
