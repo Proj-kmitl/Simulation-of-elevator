@@ -22,19 +22,11 @@
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
     <style>
-        .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            padding: 90px 0 0;
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-            z-index: 99;
-        }
+
         #navbar {
             position: sticky;
             top: 0;
+            font-size: 20px
         }
 
         @media (max-width: 767.98px) {
@@ -45,7 +37,20 @@
         }
             
         .navbar {
-            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
+           
+            position: fixed;
+            background: rgba(0,41,107,1);
+        }
+        .navbar a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        color: #818181;
+        display: block;
+        }
+
+        .navbar a:hover {
+        color: #f1f1f1;
         }
 
         @media (min-width: 767.98px) {
@@ -70,6 +75,9 @@
             /* top: 11.5rem; */
             margin-top: 2px;
         }
+        #dropdownMenuButton:focus {
+        background-color: #000;
+    }
 
      
     </style>
@@ -83,144 +91,89 @@
         
     ?>
 
-<nav id="navbar" class="navbar navbar-light bg-light p-3">
+<nav id="navbar" class="navbar   p-4" >
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-            <a class="navbar-brand" href="#">
-            Dashboard
+            <img src="Logo.PNG" alt="Flowers in Chania"style="width:140px;height:70px;">
+            <a class="navbar-brand"  font-weight=  Bold  style="color:white; font-weight: 700; font-size: 30px;">
+            ELEVATOR  MANAGE
             </a>
             <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <!-- <div class="col-12 col-md-4 col-lg-2">
-            <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
-        </div> -->
-        <div class="col-12 col-md-4 col-lg-2">
-        <!-- <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span> <span class="glyphicon glyphicon-bell" style="font-size:18px;"></span></a>
-       <ul class="dropdown-menu"></ul>
-      </li>
-     </ul> -->
-    </div>
-        <div class="col-9 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-       
-            <div class="mr-3 mt-1">
-                <!-- <a class="github-button" href="https://github.com/themesberg/simple-bootstrap-5-dashboard" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">Star</a> -->
-                <!-- <ul class="nav navbar-nav navbar-right">
-                <div class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i data-feather="bell"></i> </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"></ul>
-                </div>
-                </ul> -->
-                <div class="dropdown">
-                <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"><span class="count"></span>
-                <i data-feather="bell"></i>
-                </button> -->
-                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" name="count" id="aaa" ><span data-feather="bell"></span><span class="label label-pill label-danger count" style="border-radius:100%; background-color: red;"></span></a> -->
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="asd" ><i data-feather="bell" id="www"></i><span class="count" style="border-radius:100%; background-color: red;"></span></a>
-
-                <ul class="dropdown-menu" id="dropdown-noti" aria-labelledby="dropdownMenuButton">
-                  
-                </ul>
-                
-                </div>
-                
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" >
-                  <?php echo "Hi ".$row["name"].""; ?>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
-                  <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
-                </ul>
-              </div>
         </div>
     </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
+    <nav class="navbar navbar-expand-sm " id="navbar">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="dashboard.php">
+                          <a class="nav-link active" aria-current="page" href="dashboard.php" style="color:white;">
                           <i data-feather="home"></i>                            
-                          <span class="ml-2">Dashboard</span>
+                          <span class="ml-2">Dashboard  </span>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="cctv.php">
+                          <a class="nav-link" href="account.php"style="color:white;">
+                          <i data-feather="home"></i>                          
+                          <span class="ml-2">Account  </span>
+                          </a>
+                        </li>
+                          <li class="nav-item">
+                          <a class="nav-link" href="cctv.php" style="color:white;">
                           <i data-feather="video"></i>
-                          <span class="ml-2">CCTV</span>
+                          <span class="ml-2">CCTV  </span>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="usage_history.php">
+                          <a class="navbar" href="usage_history.php"style="color:white;">
                           <i data-feather="info"></i>                            
-                          <span class="ml-2">Usage History</span>
+                          <span class="ml-2">Usage History  </span>
                           </a>
                         </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="register_form.php">
-                          <i data-feather="user-plus"></i>                            
-                          <span class="ml-2">Register</span>
-                          </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="noti.php">
+                          <a class="nav-link" href="repair.php"style="color:white;">
                           <i data-feather="camera"></i>                            
-                          <span class="ml-2">Noti</span>
+                          <span class="ml-2">Repair  </span>
                           </a>
                         </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">
-                          <button onclick="myFunctionq()"><i data-feather="camera"></i> </button>                          
-                          <span class="ml-2">test</span>
-                          </a>
-                        </li>
-                        <!-- <li class="nav-item">
-                          <a class="nav-link" href="#">
-                          <i data-feather="camera"></i>                            
-                          <span class="ml-2">Integrations</span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link" href="#" id="submenu">
-                            <i data-feather="camera"></i>
-                            <span class="ml-2">Dropdown</span>
-                            <i class="fa fa-caret-down"></i>
-                            </button>
-                            <ul class="submenu collapse">
-                                <li><a class="nav-link" href="#">Submenu item 1 </a></li>
-                                <li><a class="nav-link" href="#">Submenu item 2 </a></li>
-                                <li><a class="nav-link" href="#">Submenu item 3 </a> </li>
-                            </ul>
-                        </li> -->
-                        <!-- <li class="nav-item">
-                            <a class="btn btn-sm btn-secondary ml-3 mt-2" href="https://themesberg.com/blog/bootstrap/simple-bootstrap-5-dashboard-tutorial">
-                            <i data-feather="camera"></i>
-                            <span class="ml-2">Read tutorial</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-sm btn-warning ml-3 mt-2" href="https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard">
-                                ⚡︎ Volt Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-sm btn-primary ml-3 mt-2" href="https://themesberg.com">
-                                By Themesberg ❤️
-                            </a>
-                        </li> -->
-                        
-                        
 
-                      </ul>
-                </div>
-            </nav>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+ 
+          </ul>
+          <div class="col-9 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+       
+       <div class="mr-3 mt-1">
+           <div class="dropdown">
+           
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="asd" ><i data-feather="bell" id="www"></i><span class="count" style="border-radius:100%; background-color: red;"></span></a>
+
+           <ul class="dropdown-menu" id="dropdown-noti" aria-labelledby="dropdownMenuButton">
+             
+           </ul>
+           
+           </div>
+           
+       </div>
+       <div class="dropdown" >
+           <button class="btn btn-secondary dropdown-toggle bf ;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"  >
+             <?php echo "Hi ".$row["name"].""; ?>
+           </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <li><a class="dropdown-item" href="#">Settings</a></li>
+             <li><a class="dropdown-item" href="#">Messages</a></li>
+             <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
+           </ul>
+         </div>
+        </div>
+      </nav>
+
+
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <!-- Github buttons -->
