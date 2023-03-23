@@ -29,6 +29,40 @@
 		#productDisplay {
 			border-radius: 100%;
 		}
+		.sidenav {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 2;
+        top: 10;
+        left: 0;
+        background-color: #111;
+ 
+        padding-top: 10px;
+        }
+
+        .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        color: #818181;
+        display: block;
+        }
+
+        .sidenav a:hover {
+        color: #f1f1f1;
+        }
+
+		body{
+        background-color: rgba(52,53,57,1);
+    	}
+
+
+
+        @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+        }
 	</style>
 
 <script>
@@ -68,14 +102,14 @@
   setInterval(getDataFromDb, 100);   // 1000 = 1 second
 </script>
 </head>
-<body class="font-mali">
+<body class="font-mali" >
+<div class="sidenav">
+    <a href="account.php">Main</a>
+    <a href="register_form.php">Add Account</a>
+    <a href="edit_form.php">Edit Account</a>
+    </div>
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Register</li>
-                    </ol>
-                </nav>
+
                 
 
 
@@ -142,7 +176,7 @@
 							</div>							
 							<button class="btn btn-success" type="submit" name="submit" id="submit" >บันทึก</button>
 							<button class="btn btn-warning" type="submit" name="reset" id="reset"  >รีเซ็ต</button>
-							<button class="btn btn-primary" type="submit" name="showstock" formaction="show_stock.php" >ดูบัญชีผู้ใช้งาน</button>
+							<button class="btn btn-primary" type="submit" name="showstock" formaction="account.php" >ดูบัญชีผู้ใช้งาน</button>
 						</form>
 					</div>
 				</div>
