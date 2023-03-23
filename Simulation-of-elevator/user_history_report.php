@@ -62,14 +62,76 @@
             margin-left: 0;
             margin-right: 0;
         }
+                .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+ 
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 34px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
+        .sidenav {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 2;
+        top: 10;
+        left: 0;
+        background-color: #111;
+ 
+        padding-top: 10px;
+        }
+
+        .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        color: #818181;
+        display: block;
+        }
+
+        .sidenav a:hover {
+        color: #f1f1f1;
+        }
+        body{
+        background-color: rgba(52,53,57,1);
+    }
     </style>
     </head>
     <body>
+    <div class="sidenav">
+    <a href="usage_history.php">Main</a>
+    <a href="Search_form.php">Search</a>
+    </div>
         <?php
             if (isset($_REQUEST['user_id'])){
-        
                 $user_id = $_REQUEST['user_id'];
-                
                 $sql = "SELECT * FROM user_history WHERE id = $user_id ORDER BY date DESC";
                 $result = $connect->query($sql);
                 //$intNumField = $result->num_fields();
@@ -84,12 +146,7 @@
                        $from = $row['from'];
                        $to = $row['to'];
                        $date = $row['date'];
-               
                        $resultArray[] = array("id" => $id, "name" => $name, "from" => $from, "to" => $to, "date" => $date); 
-
-                       
-               
-                       
                    }
                 } 
         ?>
@@ -115,7 +172,6 @@
                                         <tbody id="myBody">
                                           <?php
                                            if (isset($_REQUEST['user_id'])){
-        
                                             $user_id = $_REQUEST['user_id'];
                                             
                                             $sql = "SELECT * FROM user_history WHERE id = $user_id ORDER BY date DESC";
