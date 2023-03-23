@@ -80,8 +80,15 @@ ini_set('default_socket_timeout', 300);
     </style>
 </head>
 <body>
-    <center><span class="text ">ELEVATOR   Manage</span></center>
-    <div class="v102_142" color= rgba(255,251,251,0.8999999761581421) font-weight= Extra Bold>
+<center>
+<span class="text ">    
+<div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+            <img src="Logo.PNG" alt="Flowers in Chania"style="width:140px;height:70px;">
+            <a class="navbar-brand"  font-weight=  Bold  style="color:white; font-weight: 700; font-size: 30px;">
+            ELEVATOR  MANAGE
+            </a>
+ </center>
+    <div class="v102_142" color= rgba(255,251,251,0.8999999761581421) font-weight=  Bold>
     <h3 class="mt-4 mb-2 text-light"> LOGIN</h3>
     </div>
     <div class="v102_379">
